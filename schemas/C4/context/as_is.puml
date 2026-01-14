@@ -1,0 +1,28 @@
+@startuml
+title
+    Context Diagram: Система "Уьный дом"
+    <i>(As-Is)</i>
+end title
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "Пользователь", "управляет системой отопления")
+Person(technical_specialist, "Технический специалист", "Настрaивает оборудование")
+
+System_Boundary(smart_house_boundary, "Система: Умный дом") {
+    System(smart_house, "Уьный дом", "Система наблюдения и управления оборудованием в доме")
+}
+
+System_Boundary(external_house_boundary, "Дом, подключенный к системе") {
+    System_Ext(heating_system, "Система управления отоплением", "API для получения и установки значений температуры", "Uses HTTP")
+}
+
+Rel(user, smart_house, "Контролирует температуру")
+Rel(technical_specialist, smart_house, "Подключает датчики и модули управления")
+Rel(smart_house, heating_system,"Получает и устанавливает значения температуры")
+
+@enduml
