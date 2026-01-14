@@ -36,13 +36,14 @@ jobs:
       run: | 
        if [[ -n "$(git diff --exit-code)" ]]; then
          echo "Changes detected."
-         echo "::set-output name=has_changes::true"
+         echo "HAS_CHANGES=true" >> "$GITHUB_OUTPUT"
        else
          echo "No changes detected."
-         echo "::set-output name=has_changes::false"
+         echo "HAS_CHANGES=false" >> "$GITHUB_OUTPUT"
        fi
        
     - name: Commit Diagrams
+      if: steps.check_changes.outputs.HAS_CHANGES == 'true'
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
