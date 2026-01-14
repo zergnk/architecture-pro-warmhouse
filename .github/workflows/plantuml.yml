@@ -31,6 +31,17 @@ jobs:
 #        plantuml schemas/DDD/*.puml
 #        plantuml schemas/ER/*.puml
 
+    - name: Check for Changes
+      id: check_changes
+      run: | 
+       if [[ -n "$(git diff --exit-code)" ]]; then
+         echo "Changes detected."
+         echo "::set-output name=has_changes::true"
+       else
+         echo "No changes detected."
+         echo "::set-output name=has_changes::false"
+       fi
+       
     - name: Commit Diagrams
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
