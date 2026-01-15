@@ -28,7 +28,7 @@ jobs:
 #        plantuml schemas/C4/container/*.puml
 #        plantuml schemas/C4/component/*.puml
 #        plantuml schemas/C4/code/*.puml
-#        plantuml schemas/DDD/*.puml
+        plantuml schemas/DDD/*.puml
 #        plantuml schemas/ER/*.puml
 
     - name: Check for Changes

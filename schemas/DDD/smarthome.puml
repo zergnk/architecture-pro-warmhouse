@@ -1,0 +1,39 @@
+@startuml
+title Стратегический дизайн: Система "Умный дом"
+
+top to bottom direction
+
+!include <C4/C4_Container.puml>
+
+hide stereotype
+
+Boundary(domain_system_management, "Удаленное управление системами домов", "[domain]") {
+
+    System(subdomain_device_management, "Упаравление устройствами", "[subdomain]") {
+        Container(context_devices, "Регистрация, редактирование, удаление устройств", "[context]")
+        Container(context_system_heating_management, "Управление системой отопления", "[context]")
+        Container(context_systev_lightning_management, "Управление системой освещения", "[context]")
+        Container(context_gates_management, "Управление воротами", "[context]")
+    }
+
+    System(subdomain_telemetry, "Телеметрия", "[subdomain]") {
+        Container(context_systev_heting_telemetry, "Сбор данных о температуре в помещениях", "[context]")
+        Container(context_system_ligtning_telemetry, "Сбор данных о текущем статусе приборов освещения", "[context]")
+        Container(context_gates_telemetry, "Управление воротами", "[context]")
+    }
+
+    System(subdomain_script_management, "Настройка сценариев работы", "[subdomain]") {
+        Container(context_script_management, "Управление сценариями работы", "[context]")
+    }
+}
+
+Boundary(domain_security, "Управление безопасностью", "[domain]") {
+    Container("context_security", "Аутентиффикация и авторизация", "[context]")
+}
+
+Boundary(domain_users, "Управление пользователями", "domain") {
+    Container(context_user_registration, "Регистрация пользователя", "[context]")
+    Container(context_user_profile, "Профиль пользователя", "[context]")
+}
+
+@enduml
