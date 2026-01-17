@@ -78,7 +78,7 @@
 
 **Диаграмма контейнеров (Containers)**
 
-- [Container Diagram: Система "Уьный дом"](schemas/C4/container/smarthome_containers_diagram.png)
+- [Container Diagram: Система "Умный дом"](schemas/C4/container/smarthome_containers_diagram.png)
 
 **Диаграмма компонентов (Components)**
 * [](schemas/C4/component/user_data_service_component_diagram.puml)
