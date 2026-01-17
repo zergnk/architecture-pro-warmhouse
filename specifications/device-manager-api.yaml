@@ -1,0 +1,463 @@
+openapi: '3.0.0'
+info:
+  title: Module and Device API
+  description: REST API for managing Modules, ModuleTypes, Devices, and DeviceTypes
+  version: '0.0.1'
+paths:
+  /modules:
+    get:
+      operationId: getModules
+      summary: Retrieve all modules
+      tags:
+        - modules
+      responses:
+        "200":
+          description: A list of modules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Module'
+    post:
+      operationId: createModule
+      summary: Create a new module
+      tags:
+        - modules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module'
+      responses:
+        "201":
+          description: Module created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+  /modules/{moduleId}:
+    get:
+      operationId: getModuleById
+      summary: Retrieve a single module by ID
+      tags:
+        - modules
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A single module
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+    put:
+      operationId: updateModule
+      summary: Update an existing module
+      tags:
+        - modules
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module'
+      responses:
+        "200":
+          description: Module updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+    delete:
+      operationId: deleteModule
+      summary: Delete a module
+      tags:
+        - modules
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Module deleted successfully
+  /module-types:
+    get:
+      operationId: getModuleTypes
+      summary: Retrieve all module types
+      tags:
+        - module-types
+      responses:
+        "200":
+          description: A list of module types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleType'
+    post:
+      operationId: createModuleType
+      summary: Create a new module type
+      tags:
+        - module-types
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleType'
+      responses:
+        "201":
+          description: Module type created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleType'
+  /module-types/{moduleTypeId}:
+    get:
+      operationId: getModuleTypeById
+      summary: Retrieve a single module type by ID
+      tags:
+        - module-types
+      parameters:
+        - name: moduleTypeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A single module type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleType'
+    put:
+      operationId: updateModuleType
+      summary: Update an existing module type
+      tags:
+        - module-types
+      parameters:
+        - name: moduleTypeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleType'
+      responses:
+        "200":
+          description: Module type updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleType'
+    delete:
+      operationId: deleteModuleType
+      summary: Delete a module type
+      tags:
+        - module-types
+      parameters:
+        - name: moduleTypeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Module type deleted successfully
+  /devices:
+    get:
+      operationId: getDevices
+      summary: Retrieve all devices
+      tags:
+        - devices
+      responses:
+        "200":
+          description: A list of devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+    post:
+      operationId: createDevice
+      summary: Create a new device
+      tags:
+        - devices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        "201":
+          description: Device created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+  /devices/{deviceId}:
+    get:
+      operationId: getDeviceById
+      summary: Retrieve a single device by ID
+      tags:
+        - devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A single device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+    put:
+      operationId: updateDevice
+      summary: Update an existing device
+      tags:
+        - devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        "200":
+          description: Device updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+    delete:
+      operationId: deleteDevice
+      summary: Delete a device
+      tags:
+        - devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Device deleted successfully
+  /device-types:
+    get:
+      operationId: getDeviceTypes
+      summary: Retrieve all device types
+      tags:
+        - device-types
+      responses:
+        "200":
+          description: A list of device types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceType'
+    post:
+      operationId: createDeviceType
+      summary: Create a new device type
+      tags:
+        - device-types
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceType'
+      responses:
+        "201":
+          description: Device type created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceType'
+  /device-types/{deviceTypeId}:
+    get:
+      operationId: getDeviceTypeById
+      summary: Retrieve a single device type by ID
+      tags:
+        - device-types
+      parameters:
+        - name: deviceTypeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A single device type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceType'
+    put:
+      operationId: updateDeviceType
+      summary: Update an existing device type
+      tags:
+        - device-types
+      parameters:
+        - name: deviceTypeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceType'
+      responses:
+        "200":
+          description: Device type updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceType'
+    delete:
+      operationId: deleteDeviceType
+      summary: Delete a device type
+      tags:
+        - device-types
+      parameters:
+        - name: deviceTypeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Device type deleted successfully
+components:
+  schemas:
+    DeviceType:
+      description: "Тип устройства"
+      type: object
+      required:
+        - id
+        - title
+        - vendor
+        - version
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        vendor:
+          type: string
+        version:
+          type: string
+        description:
+          type: string
+        unit:
+          type: string
+    Device:
+      description: "Устройство"
+      type: object
+      required:
+        - id
+        - typeId
+        - houseId
+      properties:
+        id:
+          type: integer
+        typeId:
+          type: integer
+        houseId:
+          type: integer
+        location:
+          type: string
+        serialNumber:
+          type: string
+        status:
+          type: string
+          enum: []
+        unit:
+          type: string
+    ModuleType:
+      description: "Тип модуля"
+      type: object
+      required:
+        - id
+        - title
+        - vendor
+        - version
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        vendor:
+          type: string
+        version:
+          type: string
+        protocol:
+          type: string
+    Module:
+      description: "Mодуль"
+      type: object
+      required:
+        - id
+        - typeId
+        - houseId
+        - connectionPoint
+      properties:
+        id:
+          type: integer
+        typeId:
+          type: integer
+        houseId:
+          type: integer
+        connectionPoint:
+          type: string
+        status:
+          type: string
+          enum: []
+tags:
+  - name: device-types
+    description: "Типы устройств"
+  - name: devices
+    description: "Устройства"
+  - name: module-types
+    description: "Типы модулей"
+  - name: modules
+    description: "Модули"
+
