@@ -25,11 +25,11 @@ jobs:
     - name: Generate Diagrams
       run: |
         plantuml schemas/C4/context/*.puml
+        plantuml schemas/C4/container/*.puml
+        plantuml schemas/C4/component/*.puml
+        plantuml schemas/C4/code/*.puml
         plantuml schemas/DDD/*.puml
-#        plantuml schemas/C4/container/*.puml
-#        plantuml schemas/C4/component/*.puml
-#        plantuml schemas/C4/code/*.puml
-#        plantuml schemas/ER/*.puml
+        plantuml schemas/ER/*.puml
 
     - name: Check for Changes
       id: check_changes

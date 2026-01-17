@@ -1,0 +1,88 @@
+@startuml
+title ER Diagram: Система "Умный дом"
+
+entity User {
+    *id : integer <<generated>>
+    --
+    *firstname : varchar
+    *lastname : varchar
+    patronymic :  varchar
+    *email : varchar
+    phone : varchar
+}
+
+entity House {
+    *id : integer <<generated>>
+    --
+    *user_id : integer <<FK>>
+    *address : varchar
+}
+
+entity Device {
+    *id : integer <<generated>>
+    --
+    *type_id : integer <<FK>>
+    *house_id : integer <<FK>>
+    location : varchar
+    serial_number : varchar
+    status : varchar
+    unit: varchar
+}
+
+entity DeviceType {
+    *id : integer <<generated>>
+    --
+    *title : varchar
+    description : varchar
+    unit: varchar
+    *vendor : varchar
+    *version : varchar
+}
+
+entity ModuleType {
+    *id : integer <<generated>>
+    --
+    *title : varchar
+    description : varchar
+    *vendor : varchar
+    *version : varchar
+    protocol : varchar
+}
+
+entity Module {
+    *id : integer <<generated>>
+    --
+    *type_id : integer
+    *house_id : integer
+    *connection_point : varchr
+    *status: varchar
+}
+
+entity TelemetryData {
+    *id : integer <<generated>>
+    --
+    *device_id : integer <<FK>>
+    *value : real
+    *status : varchar
+    time: timestamp
+}
+
+entity Scenario {
+    *id : integer <<generated>>
+    --
+    *home_id : integer
+    *title : varchar
+    scrypt : varchar
+}
+
+
+User ||..o{ House
+DeviceType ||..o{ Device
+House ||..o{ Device
+Device ||..o{ TelemetryData
+ModuleType ||..o{ Module
+Module ||..o{ Device
+House ||..o{ Module
+House ||..o{ Scenario
+
+@enduml

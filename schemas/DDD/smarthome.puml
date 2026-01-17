@@ -7,33 +7,34 @@ top to bottom direction
 
 hide stereotype
 
-Boundary(domain_system_management, "Удаленное управление системами домов", "[domain]") {
+Boundary(domain_smarthome_management, "Удаленное управление умным домом", "[domain]") {
 
-    System(subdomain_device_management, "Упаравление устройствами", "[subdomain]") {
-        Container(context_devices, "Регистрация, редактирование, удаление устройств", "[context]")
+    System(subdomain_devices, "Устройства", "[subdomain]") {
+        Container(context_device_management, "Управление устройствами", "[context]")
+    }
+
+    System(subdomain_device_management, "Управление сисмемами в доме", "[subdomain]") {
         Container(context_system_heating_management, "Управление системой отопления", "[context]")
-        Container(context_systev_lightning_management, "Управление системой освещения", "[context]")
+        Container(context_system_lightning_management, "Управление системой освещения", "[context]")
         Container(context_gates_management, "Управление воротами", "[context]")
     }
 
     System(subdomain_telemetry, "Телеметрия", "[subdomain]") {
-        Container(context_systev_heting_telemetry, "Сбор данных о температуре в помещениях", "[context]")
-        Container(context_system_ligtning_telemetry, "Сбор данных о текущем статусе приборов освещения", "[context]")
-        Container(context_gates_telemetry, "Управление воротами", "[context]")
+        Container(context_system_telemetry_management, "Управление телеметрией, сбор данных", "[context]")
     }
 
-    System(subdomain_script_management, "Настройка сценариев работы", "[subdomain]") {
-        Container(context_script_management, "Управление сценариями работы", "[context]")
+    System(subdomain_scenario_management, "Сценарии работы", "[subdomain]") {
+        Container(context_scenario_management, "Управление сценариями работы", "[context]")
     }
 }
 
-Boundary(domain_security, "Управление безопасностью", "[domain]") {
+Boundary(domain_security, "Управление системой безопасности", "[domain]") {
     Container("context_security", "Аутентиффикация и авторизация", "[context]")
 }
 
-Boundary(domain_users, "Управление пользователями", "domain") {
-    Container(context_user_registration, "Регистрация пользователя", "[context]")
-    Container(context_user_profile, "Профиль пользователя", "[context]")
+Boundary(domain_users, "Управление пользовательскими данными", "[domain]") {
+    Container(context_user_management, "Управление пользователями", "[context]")
+    Container(context_house_management, "Управление домами", "[context]")
 }
 
 @enduml
