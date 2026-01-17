@@ -1,0 +1,7 @@
+@startuml
+title Component Diagram: Сервиси
+
+!include <C4/C4_Component.puml>
+
+Container_Boundary(user_data_management_service, "Сервис управления пользовательскими данными")
+@enduml

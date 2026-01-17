@@ -54,7 +54,7 @@
 - Домен (вспомогательный) - Управление пользовательскими данными
     - Контекст - Управление пользователями
     - Контекст - Управление домами
-
+ 
 [Стратегический дизайн: Система "Умный дом"](schemas/DDD/smarthome.png)
 
 
@@ -81,8 +81,13 @@
 - [Container Diagram: Система "Уьный дом"](schemas/C4/container/smarthome_containers_diagram.png)
 
 **Диаграмма компонентов (Components)**
-
-Добавьте диаграмму для каждого из выделенных микросервисов.
+* [](schemas/C4/component/user_data_service_component_diagram.puml)
+* [Component Diagram: Сервис управления устройствами](device_management_service_component_diagram.puml)
+* [Component Diagram: Сервис телеметрии](telemetry_service_compontnt_diagram.puml)
+* [Component Diagram: Сервис управления сценариями](scenario_service_component_diagram.puml)
+* [Component Diagram: Сервис управления системой отопления"](gates_system_management_service.puml)
+* [Component Diagram: Сервис управления системой освещения](heating_system_management_service.puml)
+* [Component Diagram: Сервис управления воротоми](lightning_system_management_service.puml)
 
 **Диаграмма кода (Code)**
 

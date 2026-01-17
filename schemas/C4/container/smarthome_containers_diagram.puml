@@ -5,7 +5,7 @@ top to bottom direction
 
 !include <C4/C4_Container.puml>
 
-'LAYOUT_WITH_LEGEND()
+LAYOUT_WITH_LEGEND()
 
 Person(user, "Пользователь")
 
@@ -22,11 +22,6 @@ System_Boundary(smart_house, "Система 'Умный дом'") {
 
     Container("telemetry_service", "Сервис телеметрии", "контексты: Управление телеметрией и сбор данных")
     Container("scenario_management_service", "Сервис управления сценариями", "контексты: Управление сценариями работы и их выполнение")
-
-    Container("heating_system_modules_api_service", "Сервис взаимодействия с модулями управления системы отопления", "")
-    Container("lightning_system_modules_api_service", "Сервис взаимодействия с модулями управления системы освещения", "")
-    Container("gates_modules_api_service", "Сервис взаимодействия с модулями управления воротами", "")
-
 }
 
 Boundary(external_house_boundary, "Дом, подключенный к системе 'Умный дом'") {
@@ -37,32 +32,28 @@ Boundary(external_house_boundary, "Дом, подключенный к сист�
 
 
 
-Rel(user, api_gateway, "")
-Rel(user, auth_service, "")
-Rel(api_gateway, auth_service, "")
-Rel(api_gateway, user_data_management_service, "")
-Rel(api_gateway, device_management_service, "")
-Rel(api_gateway, telemetry_service, "")
-Rel(api_gateway, scenario_management_service, "")
-Rel(api_gateway, system_heating_management_service, "")
-Rel(api_gateway, system_lightning_management_service, "")
-Rel(api_gateway, gates_management_service, "")
+Rel(user, api_gateway, "", "Rest API")
+Rel(user, auth_service, "", "http")
+Rel(api_gateway, auth_service, "", "http")
+Rel(api_gateway, user_data_management_service, "", "Rest API")
+Rel(api_gateway, device_management_service, "", "Rest API")
+Rel(api_gateway, telemetry_service, "", "Rest API")
+Rel(api_gateway, scenario_management_service, "", "Rest API")
+Rel(api_gateway, system_heating_management_service, "", "Rest API")
+Rel(api_gateway, system_lightning_management_service, "", "Rest API")
+Rel(api_gateway, gates_management_service, "", "Rest API")
 
-Rel(scenario_management_service, system_heating_management_service, "")
-Rel(scenario_management_service, system_lightning_management_service, "")
+Rel(scenario_management_service, system_heating_management_service, "", "Rest API")
+Rel(scenario_management_service, system_lightning_management_service, "", "Rest API")
 Rel(scenario_management_service, gates_management_service, "")
 
-Rel("system_heating_management_service", heating_system_modules_api_service, "Запрос текущего значения температуры, состояния системы отопления, включение/выключение системы отопления)")
-Rel("system_lightning_management_service", lightning_system_modules_api_service, "Включение/выключение приборов освещения")
-Rel("gates_management_service", gates_modules_api_service, "Открытие/закрытие ворот")
+Rel("telemetry_service", system_heating_management_service, "", "Rest API")
+Rel("telemetry_service", system_lightning_management_service, "", "Rest API")
+Rel("telemetry_service", gates_management_service, "", "Rest API")
 
-Rel("telemetry_service", heating_system_modules_api_service, "Запрос текущего значения температуры, состояния системы отопления (включена/выключена)")
-Rel("telemetry_service", lightning_system_modules_api_service, "Запрос состояния приборов освещения (включена/выключена)")
-Rel("telemetry_service", gates_modules_api_service, "Запрос положения ворот (открыты/закрыты)")
-
-Rel(heating_system_modules_api_service, heating_system, "")
-Rel(lightning_system_modules_api_service, lightning_system, "")
-Rel(gates_modules_api_service, gates_system, "")
+Rel(system_heating_management_service, heating_system, "http")
+Rel(system_lightning_management_service, lightning_system, "http")
+Rel(gates_management_service, gates_system, "http")
 
 
 @enduml
