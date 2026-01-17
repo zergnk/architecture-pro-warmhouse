@@ -81,15 +81,18 @@
 - [Container Diagram: Система "Умный дом"](schemas/C4/container/smarthome_containers_diagram.png)
 
 **Диаграмма компонентов (Components)**
-* [Component Diagram: Сервис управления пользовательскими данными](schemas/C4/component/user_data_service_component_diagram.puml)
-* [Component Diagram: Сервис управления устройствами](schemas/C4/component/device_management_service_component_diagram.puml)
-* [Component Diagram: Сервис телеметрии](schemas/C4/component/telemetry_service_compontnt_diagram.puml)
-* [Component Diagram: Сервис управления сценариями](schemas/C4/component/scenario_service_component_diagram.puml)
-* [Component Diagram: Сервис управления системой отопления"](schemas/C4/component/gates_system_management_service.puml)
-* [Component Diagram: Сервис управления системой освещения](schemas/C4/component/heating_system_management_service.puml)
-* [Component Diagram: Сервис управления воротоми](schemas/C4/component/lightning_system_management_service.puml)
+ 
+* [Component Diagram: Сервис управления пользовательскими данными](schemas/C4/component/user_data_service_component_diagram.png)
+* [Component Diagram: Сервис управления устройствами](schemas/C4/component/device_management_service_component_diagram.png)
+* [Component Diagram: Сервис телеметрии](schemas/C4/component/telemetry_service_compontnt_diagram.png)
+* [Component Diagram: Сервис управления сценариями](schemas/C4/component/scenario_service_component_diagram.png)
+* [Component Diagram: Сервис управления системой отопления"](schemas/C4/component/gates_system_management_service.png)
+* [Component Diagram: Сервис управления системой освещения](schemas/C4/component/heating_system_management_service.png)
+* [Component Diagram: Сервис управления воротоми](schemas/C4/component/lightning_system_management_service.png)
 
 **Диаграмма кода (Code)**
+
+* [Code Diagram: ](schemas/C4/code/devece_management_model.png)
 
 Добавьте одну диаграмму или несколько.
 
