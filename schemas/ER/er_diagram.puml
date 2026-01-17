@@ -22,6 +22,7 @@ entity Device {
     *id : integer <<generated>>
     --
     *type_id : integer <<FK>>
+    *module_id : integer <<FK>>
     *house_id : integer <<FK>>
     location : varchar
     serial_number : varchar
