@@ -55,5 +55,8 @@ Rel(system_heating_management_service, heating_system, "[http]")
 Rel(system_lightning_management_service, lightning_system, "[http]")
 Rel(gates_management_service, gates_system, "[http]")
 
+Rel(system_heating_management_service, "device_management_service", "[Rest API]")
+Rel(system_lightning_management_service, device_management_service, "[Rest API]")
+Rel(gates_management_service, device_management_service, "[Rest API]")
 
 @enduml
