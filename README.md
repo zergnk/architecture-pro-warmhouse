@@ -92,7 +92,7 @@
 
 **Диаграмма кода (Code)**
 
-* [Code Diagram: ](schemas/C4/code/devece_management_model.png)
+* [Code Diagram: devices-component](schemas/C4/code/devices_class_diagram.png)
 
 Добавьте одну диаграмму или несколько.
 

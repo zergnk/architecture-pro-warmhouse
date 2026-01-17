@@ -1,39 +1,5 @@
 @startuml
-title Class Diagram: 
-
-package comnrollers {
-    class DeviceTypeController {
-        HttpResponse getById(Integer id)
-        HttpResponse getAll()
-        HttpResponse create()
-        HttpResponse update()
-        HttpResponse delete(Integer id)
-    }
-
-    class DeviceController {
-        HttpResponse getById(Integer id)
-        HttpResponse getAll()
-        HttpResponse create()
-        HttpResponse update()
-        HttpResponse delete(Integer id)
-    }
-
-    class ModuleTypeController {
-        HttpResponse getById(Integer id)
-        HttpResponse getAll()
-        HttpResponse create()
-        HttpResponse update()
-        HttpResponse delete(Integer id)
-    }
-
-    class ModuleController {
-        HttpResponse getById(Integer id)
-        HttpResponse getAll()
-        HttpResponse create()
-        HttpResponse update()
-        HttpResponse delete(Integer id)
-    }
-}
+title Class Diagram: devices-component
 
 package services {
     class DeviceTypeService {
@@ -135,11 +101,6 @@ package domain {
         String connection_point
         Enum status
     }
-
-    DeviceTypeController --> DeviceTypeService
-    DeviceController --> DeviceService
-    ModuleTypeController --> ModuleTypeService
-    ModuleController --> ModuleService
 
     DeviceTypeService --> DeviceTypeRepository
     DeviceService --> DeviceRepository
