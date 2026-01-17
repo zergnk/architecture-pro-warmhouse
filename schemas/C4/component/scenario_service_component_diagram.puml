@@ -1,7 +1,31 @@
 @startuml
-title Component Diagram: Сервис управления пользовательскими данными
+title Component Diagram: Сервис управления сценариями
 
 !include <C4/C4_Component.puml>
 
-Container_Boundary(user_data_management_service, "Сервис управления пользовательскими данными")
+
+System_Boundary(smart_house, "Система 'Умный дом'") {
+    Container("api_gateway", "API шлюз", "")
+
+    Container_Boundary(user_data_management_service, "Сервис управления сценариями") {
+        Component(component_scenarios_api, "scenarios-api", "API endpoints для работы со сценариями", "Spring MVC")
+        Component(component_scenarios, "scenatios-component", "Компонент обеспечивает функциональность для управления сценариями", "Spring Bean")
+        Component(component_scenarios_execution, "scenarions-execution-component", "Компонент обеспечивает функциональность для выполнения сценариев", "Spring Bean")
+    }
+
+    Container(container_heating_system, "Cервис управления системой отопления", "")
+    Container(container_lightning_system, "Cервис управления системой освещения", "")
+    Container(container_gates_system, "Cервис управления воротами", "")
+    ContainerDb(db, "Данные о сценариях, расписаниях запуска и статусах выполнения", "PostgreSQL")
+}
+
+Rel(api_gateway, component_scenarios_api, "")
+Rel(component_scenarios_api, component_scenarios, "")
+Rel(component_scenarios, db, "")
+
+Rel(component_scenarios_execution, container_heating_system, "")
+Rel(component_scenarios_execution, container_lightning_system, "")
+Rel(component_scenarios_execution, container_gates_system, "")
+Rel(component_scenarios_execution, db, "")
+
 @enduml

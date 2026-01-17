@@ -98,7 +98,7 @@
 
 # Задание 3. Разработка ER-диаграммы
 
-- [ER Diagram: Система "Уьный дом"](schemas/ER/er_diagram.png)
+- [ER Diagram: Система "Умный дом"](schemas/ER/er_diagram.png)
 
 # Задание 4. Создание и документирование API
 

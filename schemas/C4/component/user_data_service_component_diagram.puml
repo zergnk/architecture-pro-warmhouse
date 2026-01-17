@@ -3,5 +3,20 @@ title Component Diagram: Сервис управления пользовате�
 
 !include <C4/C4_Component.puml>
 
-Container_Boundary(user_data_management_service, "Сервис управления пользовательскими данными")
+
+System_Boundary(smart_house, "Система 'Умный дом'") {
+    Container("api_gateway", "API шлюз", "")
+
+    Container_Boundary(user_data_management_service, "Сервис управления пользовательскими данными") {
+        Component(component_user_data_api, "users-data-api", "API endpoints для работы с пользователями и их домами", "Spring MVC")
+        Component(component_user_data, "user-data-component", "Компонент обеспечивает функциональность для управления пользователи и их домами", "Spring Bean")
+    }
+
+    ContainerDb(db, "Данные о пользователях и их домах", "PostgreSQL")
+}
+
+Rel(api_gateway, component_user_data_api, "")
+Rel(component_user_data_api, component_user_data, "")
+Rel(component_user_data, db, "")
+
 @enduml
