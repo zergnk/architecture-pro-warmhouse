@@ -1,8 +1,6 @@
 @startuml
 title Class Diagram: 
 
-
-
 class Module {
 }
 
