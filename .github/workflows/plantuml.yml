@@ -30,18 +30,18 @@ jobs:
         plantuml schemas/C4/code/*.puml
         plantuml schemas/DDD/*.puml
         plantuml schemas/ER/*.puml
-        git status
+        # git status
 
-    - name: Check for Changes
-      id: check_changes
-      run: | 
-       if [[ -n "$(git diff --exit-code)" ]]; then
-         echo "Changes detected."
-         echo "HAS_CHANGES=true" >> "$GITHUB_OUTPUT"
-       else
-         echo "No changes detected."
-         echo "HAS_CHANGES=false" >> "$GITHUB_OUTPUT"
-       fi
+    # - name: Check for Changes
+    #   id: check_changes
+    #   run: | 
+    #    if [[ -n "$(git diff --exit-code)" ]]; then
+    #      echo "Changes detected."
+    #      echo "HAS_CHANGES=true" >> "$GITHUB_OUTPUT"
+    #    else
+    #      echo "No changes detected."
+    #      echo "HAS_CHANGES=false" >> "$GITHUB_OUTPUT"
+    #    fi
        
     - name: Commit Diagrams
       run: |
@@ -52,4 +52,4 @@ jobs:
         git status
         git commit -m "Automated diagram generation"
         git push origin warmhouse
-      if: success() && steps.check_changes.outputs.HAS_CHANGES == 'true'
+      if: success() # && steps.check_changes.outputs.HAS_CHANGES == 'true'
