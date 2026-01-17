@@ -32,28 +32,28 @@ Boundary(external_house_boundary, "Дом, подключенный к сист�
 
 
 
-Rel(user, api_gateway, "", "Rest API")
-Rel(user, auth_service, "", "http")
-Rel(api_gateway, auth_service, "", "http")
-Rel(api_gateway, user_data_management_service, "", "Rest API")
-Rel(api_gateway, device_management_service, "", "Rest API")
-Rel(api_gateway, telemetry_service, "", "Rest API")
-Rel(api_gateway, scenario_management_service, "", "Rest API")
-Rel(api_gateway, system_heating_management_service, "", "Rest API")
-Rel(api_gateway, system_lightning_management_service, "", "Rest API")
-Rel(api_gateway, gates_management_service, "", "Rest API")
+Rel(user, api_gateway, "[Rest API]")
+Rel(user, auth_service, "[http]")
+Rel(api_gateway, auth_service, "[http]")
+Rel(api_gateway, user_data_management_service, "[Rest API]")
+Rel(api_gateway, device_management_service, "[Rest API]")
+Rel(api_gateway, telemetry_service, "[Rest API]")
+Rel(api_gateway, scenario_management_service, "[Rest API]")
+Rel(api_gateway, system_heating_management_service, "[Rest API]")
+Rel(api_gateway, system_lightning_management_service, "[Rest API]")
+Rel(api_gateway, gates_management_service, "[Rest API]")
 
-Rel(scenario_management_service, system_heating_management_service, "", "Rest API")
-Rel(scenario_management_service, system_lightning_management_service, "", "Rest API")
-Rel(scenario_management_service, gates_management_service, "")
+Rel(scenario_management_service, system_heating_management_service, "[Rest API]")
+Rel(scenario_management_service, system_lightning_management_service, "[Rest API]")
+Rel(scenario_management_service, gates_management_service, "[Rest API]")
 
-Rel("telemetry_service", system_heating_management_service, "", "Rest API")
-Rel("telemetry_service", system_lightning_management_service, "", "Rest API")
-Rel("telemetry_service", gates_management_service, "", "Rest API")
+Rel("telemetry_service", system_heating_management_service, "[Rest API]",)
+Rel("telemetry_service", system_lightning_management_service, "[Rest API]")
+Rel("telemetry_service", gates_management_service, "[Rest API]")
 
-Rel(system_heating_management_service, heating_system, "http")
-Rel(system_lightning_management_service, lightning_system, "http")
-Rel(gates_management_service, gates_system, "http")
+Rel(system_heating_management_service, heating_system, "[http]")
+Rel(system_lightning_management_service, lightning_system, "[http]")
+Rel(gates_management_service, gates_system, "[http]")
 
 
 @enduml
