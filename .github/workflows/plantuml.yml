@@ -30,7 +30,6 @@ jobs:
         plantuml schemas/C4/code/*.puml
         plantuml schemas/DDD/*.puml
         plantuml schemas/ER/*.puml
-        # git status
 
     # - name: Check for Changes
     #   id: check_changes
@@ -47,9 +46,8 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git status
         git add schemas/**/*.png
-        git status
+        git add schemas/C4/**/*.png
         git commit -m "Automated diagram generation"
         git push origin warmhouse
       if: success() # && steps.check_changes.outputs.HAS_CHANGES == 'true'
