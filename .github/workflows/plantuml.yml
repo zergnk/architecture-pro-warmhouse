@@ -47,7 +47,14 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add schemas/**/*.png
+        # Next command with globstar doesn't work. Why?
+        # git add schemas/**/*.png
+        git add schemas/C4/context/*.puml
+        git add schemas/C4/container/*.puml
+        git add schemas/C4/component/*.puml
+        git add schemas/C4/code/*.puml
+        git add schemas/DDD/*.puml
+        git add schemas/ER/*.puml
         git commit -m "Automated diagram generation"
         git push origin warmhouse
       if: success() && steps.check_changes.outputs.HAS_CHANGES == 'true'
