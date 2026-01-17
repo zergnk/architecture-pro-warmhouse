@@ -30,7 +30,7 @@ jobs:
         plantuml schemas/C4/code/*.puml
         plantuml schemas/DDD/*.puml
         plantuml schemas/ER/*.puml
-#    find . -name "*.cmapx" -type f -delete
+        find . -name "*.cmapx" -type f -delete
 
     - name: Check for Changes
       id: check_changes
