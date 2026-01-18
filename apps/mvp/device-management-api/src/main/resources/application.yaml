@@ -8,7 +8,7 @@ spring:
     password: ${DB_PASSWORD:"postgres"}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+#      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
@@ -31,4 +31,4 @@ management:
         include: health
 
 monolith-api:
-  url: ${MONOLITH_API_URL:"http://localhost:8080"}
+  url: ${MONOLITH_API_URL:"http://localhost:8080/api/v1/sensors"}
