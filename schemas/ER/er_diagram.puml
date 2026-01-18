@@ -26,7 +26,7 @@ entity Device {
     *house_id : integer <<FK>>
     location : varchar
     serial_number : varchar
-    status : varchar
+    state : varchar
     unit: varchar
 }
 

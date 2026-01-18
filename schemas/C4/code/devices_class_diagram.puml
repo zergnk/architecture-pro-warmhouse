@@ -81,7 +81,7 @@ package domain {
         Integer houseId
         String location
         String serialNumber
-        Enum status
+        Enum state
         String unit
      }
 

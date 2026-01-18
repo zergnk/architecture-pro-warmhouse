@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: telemetry-api
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:"jdbc:postgresql://localhost:5432/telemetry"}
+    username: ${DB_USER:"postgres"}
+    password: ${DB_PASSWORD:"postgres"}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    show-sql: false
+    properties:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        format_sql: true
+        types:
+          print:
+            banner: false
+
+server:
+  port: 8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+monolith-api:
+  url: ${MONOLITH_API_URL:"http://localhost:8080"}
+device-management-api:
+  url: ${DEVICE_MANAGEMENT_API_URL:"http://localhost:8083"}
