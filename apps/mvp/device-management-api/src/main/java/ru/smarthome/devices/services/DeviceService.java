@@ -91,8 +91,8 @@ public class DeviceService {
             device.setSerialNumber(dto.getSerialNumber());
         }
 
-        if (Objects.nonNull(dto.getStatus())) {
-            device.setState(dto.getStatus());
+        if (Objects.nonNull(dto.getState())) {
+            device.setState(dto.getState());
         }
 
         Device persistedDevice = deviceRepository.save(device);

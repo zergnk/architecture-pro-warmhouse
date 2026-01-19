@@ -12,7 +12,8 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RestController("/api/v1/devices")
+@RestController
+@RequestMapping("/api/v1/devices")
 public class DeviceController {
 
     private DeviceService deviceService;
@@ -34,7 +35,6 @@ public class DeviceController {
 
     @PostMapping(produces = APPLICATION_JSON_VALUE)
     public DeviceDto create(@RequestBody DeviceDto dto) throws Exception {
-
         return deviceService.create(dto);
     }
 

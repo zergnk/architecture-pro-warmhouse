@@ -10,8 +10,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ../smart_home/init.sql:/docker-entrypoint-initdb.d/init-smarthome.sql
-      - ../temperature-api/init.sql:/docker-entrypoint-initdb.d/init-temperature-api.sql
+      - ./smart_home/init.sql:/docker-entrypoint-initdb.d/init-smarthome.sql
+      - ./temperature-api/init.sql:/docker-entrypoint-initdb.d/init-temperature-api.sql
       - ./device-management-api/init.sql:/docker-entrypoint-initdb.d/init-device-management-api.sql
       - ./telemetry-api/init.sql:/docker-entrypoint-initdb.d/init-telemetry-api.sql
       - postgres-data:/var/lib/postgresql/data
@@ -26,7 +26,7 @@ services:
 
   temperature-api:
       build:
-        context: ../temperature-api
+        context: ./temperature-api
         dockerfile: Dockerfile
       image: temperature-api
       container_name: temperature-api
@@ -75,7 +75,7 @@ services:
 
   app:
     build:
-      context: ../smart_home
+      context: ./smart_home
       dockerfile: Dockerfile
     image: smarthome-app
     container_name: smarthome-app

@@ -13,7 +13,7 @@ public class DeviceDto {
     private Integer houseId;
     private String location;
     private String serialNumber;
-    private DeviceState status;
+    private DeviceState state;
     private String unit;
 
 
@@ -25,7 +25,7 @@ public class DeviceDto {
         dto.setHouseId(device.getHouseId());
         dto.setLocation(device.getLocation());
         dto.setSerialNumber(device.getSerialNumber());
-        dto.setStatus(device.getState());
+        dto.setState(device.getState());
         dto.setUnit(device.getUnit());
 
         return dto;
@@ -39,7 +39,7 @@ public class DeviceDto {
         device.setHouseId(getHouseId());
         device.setLocation(getLocation());
         device.setSerialNumber(getSerialNumber());
-        device.setState(getStatus());
+        device.setState(getState());
         device.setUnit(getUnit());
 
         return device;
