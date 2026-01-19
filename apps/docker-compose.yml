@@ -4,15 +4,50 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: smarthome-postgres
-  ## тут нужно добавить настройки
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./smart_home/init.sql:/docker-entrypoint-initdb.d/init-smarthome.sql
+      - ./temperature-api/init.sql:/docker-entrypoint-initdb.d/init-temperature-api.sql
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+    networks:
+      - smarthome-network
 
   temperature-api:
-  ## тут нужно добавить приложение
+      build:
+        context: ./temperature-api
+        dockerfile: Dockerfile
+      image: temperature-api
+      container_name: temperature-api
+      depends_on:
+        postgres:
+          condition: service_healthy
+      ports:
+        - "8081:8081"
+      restart: unless-stopped
+      healthcheck:
+        test: ["CMD-SHELL", "curl --fail --silent http://localhost:8081/actuator/health/readiness | grep UP || exit 1"]
+        interval: 10s
+        retries: 5
+        start_period: 10s
+        timeout: 5s
+      networks:
+        - smarthome-network
 
   app:
     build:
       context: ./smart_home
       dockerfile: Dockerfile
+    image: smarthome-app
     container_name: smarthome-app
     depends_on:
       postgres:
@@ -25,11 +60,17 @@ services:
     ports:
       - "8080:8080"
     restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --fail --silent http://localhost:8080/health | grep ok || exit 1" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
     networks:
       - smarthome-network
 
 volumes:
-  postgres_data:
+  postgres-data:
 
 networks:
   smarthome-network:

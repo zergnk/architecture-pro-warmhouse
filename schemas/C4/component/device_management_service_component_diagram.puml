@@ -1,0 +1,20 @@
+@startuml
+title Component Diagram: Сервис управления устройствами
+
+!include <C4/C4_Component.puml>
+
+System_Boundary(smart_house, "Система 'Умный дом'") {
+    Container("api_gateway", "API шлюз", "")
+
+    Container_Boundary(user_data_management_service, "Сервис управления устройствами") {
+        Component(component_devices_api, "devices-api", "API endpoints для управления устройствами и модулями", "Spring MVC")
+        Component(component_devices, "devices-component", "Компонент обеспечивает функциональность для управления устройствами и модулями", "Spring Bean")
+    }
+
+    ContainerDb(db, "Данные об устройствах и модулях", "PostgreSQL")
+}
+
+Rel(api_gateway, component_devices_api, "")
+Rel(component_devices_api, component_devices, "")
+Rel(component_devices, db, "")
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+title Стратегический дизайн: Система "Умный дом"
+
+top to bottom direction
+
+!include <C4/C4_Container.puml>
+
+hide stereotype
+
+Boundary(domain_smarthome_management, "Удаленное управление умным домом", "[domain]") {
+
+    System(subdomain_devices, "Устройства", "[subdomain]") {
+        Container(context_device_management, "Управление устройствами", "[context]")
+    }
+
+    System(subdomain_device_management, "Управление сисмемами в доме", "[subdomain]") {
+        Container(context_system_heating_management, "Управление системой отопления", "[context]")
+        Container(context_system_lightning_management, "Управление системой освещения", "[context]")
+        Container(context_gates_management, "Управление воротами", "[context]")
+    }
+
+    System(subdomain_telemetry, "Телеметрия", "[subdomain]") {
+        Container(context_system_telemetry_management, "Управление телеметрией, сбор данных", "[context]")
+    }
+
+    System(subdomain_scenario_management, "Сценарии работы", "[subdomain]") {
+        Container(context_scenario_management, "Управление сценариями работы", "[context]")
+    }
+}
+
+Boundary(domain_security, "Управление системой безопасности", "[domain]") {
+    Container("context_security", "Аутентиффикация и авторизация", "[context]")
+}
+
+Boundary(domain_users, "Управление пользовательскими данными", "[domain]") {
+    Container(context_user_management, "Управление пользователями", "[context]")
+    Container(context_house_management, "Управление домами", "[context]")
+}
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+title Component Diagram: Сервис управления системой отопления
+
+!include <C4/C4_Component.puml>
+
+
+System_Boundary(smart_house, "Система 'Умный дом'") {
+    Container("api_gateway", "API шлюз", "")
+
+    Container_Boundary(user_data_management_service, "Сервис управления системой отопления") {
+        Component(component_heating_system_api, "heating-system-api", "API endpoints для получения значений температуры и управления системой отопления", "Spring MVC")
+        Component(component_heating_system, "heating-system-component", "Компонент обеспечивает функциональность для получения значений температуры и управления системой отопленя, получения и хранения информации о настройках соединения устройств", "Spring Bean")
+        Component(component_device_adapter, "device-adapter-component", "Компонент обеспечивает функциональность для выполнения запросов к устройствам, управляющим системой отопления в доме", "Spring Bean")
+    }
+
+    Container(container_device_manager, "Сервис управления устройствами", "")
+    ContainerDb(db, "Данные о настройках модулей и устройств для выполнения запросов", "PostgreSQL")
+}
+
+Boundary(external_house_boundary, "Дом, подключенный к системе 'Умный дом'") {
+    System_Ext(heating_system, "Система управления отоплением", "API для получения данных о текущем состоянии, а также получения и установки значений температуры")
+}
+
+
+Rel(api_gateway, component_heating_system_api, "")
+Rel(component_heating_system_api, component_heating_system, "")
+Rel(component_heating_system, component_device_adapter, "")
+Rel(component_heating_system, container_device_manager, "")
+Rel(component_heating_system, db, "")
+
+Rel(component_device_adapter, heating_system, "")
+
+@enduml

@@ -1,0 +1,53 @@
+name: PlantUML Diagrams
+
+on:
+  push:
+    branches:
+      - warmhouse
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu'
+        java-version: '21'
+
+    - name: Install PlantUML
+      run: sudo apt-get install plantuml
+
+    - name: Generate Diagrams
+      run: |
+        plantuml schemas/C4/context/*.puml
+        plantuml schemas/C4/container/*.puml
+        plantuml schemas/C4/component/*.puml
+        plantuml schemas/C4/code/*.puml
+        plantuml schemas/DDD/*.puml
+        plantuml schemas/ER/*.puml
+
+    - name: Check for Changes
+      id: check_changes
+      run: | 
+       if [[ -n "$(git diff --exit-code)" ]]; then
+         echo "Changes detected."
+         echo "HAS_CHANGES=true" >> "$GITHUB_OUTPUT"
+       else
+         echo "No changes detected."
+         echo "HAS_CHANGES=false" >> "$GITHUB_OUTPUT"
+       fi
+       
+    - name: Commit Diagrams
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add schemas/**/*.png
+        git add schemas/C4/**/*.png
+        git commit -m "Automated diagram generation"
+        git push origin warmhouse
+      if: success() && steps.check_changes.outputs.HAS_CHANGES == 'true'

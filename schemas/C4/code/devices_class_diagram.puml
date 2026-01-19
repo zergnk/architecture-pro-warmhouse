@@ -1,0 +1,116 @@
+@startuml
+title Class Diagram: devices-component
+
+package services {
+    class DeviceTypeService {
+        DeviceTypeDto getById(Integer id)
+        List<DeviceType> getAll()
+        void create(DeviceTypeDto dto)
+        void update(DeviceTypeDto dto)
+        void delete(Integer id)
+    }
+
+    class DeviceService {
+        DeviceDto getById(Integer id)
+        List<Device> getAll()
+        void create(DeviceDto dto)
+        void update(DeviceDto dto)
+        void delete(Integer id)
+    }
+
+    class ModuleTypeService {
+        Device getById(Integer id)
+        List<ModuleTypeDto> getAll()
+        void create(ModuleTypeDto dto)
+        void update(ModuleTypeDto dto)
+        void delete(Integer id)
+    }
+
+    class ModuleService {
+        Device getById(Integer id)
+        List<ModuleDto> getAll()
+        void create(ModuleDto dto)
+        void update(ModuleDto dto)
+        void delete(Integer id)
+    }
+}
+
+package repositories {
+    class DeviceTypeRepository {
+        DeviceType getById(Integer id)
+        List<DeviceType> getAll()
+        void save(DeviceType type)
+        void delete(Integer id)
+    }
+
+    class DeviceRepository {
+        Device getById(Integer id)
+        List<Device> getAll()
+        void save(Device device)
+        void delete(Integer id)
+    }
+
+    class ModuleTypeRepository {
+        ModuleType getById(Integer id)
+        List<ModuleType> getAll()
+        void save(ModuleType type)
+        void delete(Integer id)
+    }
+
+    class ModuleRepository {
+        Module getById(Integer id)
+        List<Module> getAll()
+        void save(Module module)
+        void delete(Integer id)
+    }
+}
+
+package domain {
+    class DeviceType {
+        Integer id
+        String title
+        String description
+        String unit
+        String vendor
+        String version
+    }
+
+    class Device {
+        Integer id
+        DeviceType type
+        Integer houseId
+        String location
+        String serialNumber
+        Enum state
+        String unit
+     }
+
+    class ModuleType {
+        Integer id
+        String title
+        String description
+        String vendor
+        String version
+        String protocol
+    }
+
+    class Module {
+        Integer *id
+        ModuleType type
+        Integer *houseId
+        String connection_point
+        Enum status
+    }
+
+    DeviceTypeService --> DeviceTypeRepository
+    DeviceService --> DeviceRepository
+    ModuleTypeService --> ModuleTypeRepository
+    ModuleService --> ModuleRepository
+
+    Device --> DeviceType
+    Module --> ModuleType
+    Device --> Module
+}
+
+
+@enduml

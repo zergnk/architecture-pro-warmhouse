@@ -1,0 +1,33 @@
+@startuml
+title Component Diagram: Сервис управления воротами
+
+!include <C4/C4_Component.puml>
+
+
+System_Boundary(smart_house, "Система 'Умный дом'") {
+    Container("api_gateway", "API шлюз", "")
+
+    Container_Boundary(user_data_management_service, "Сервис управления воротами") {
+        Component(component_gates_api, "gates-api", "API endpoints для получения состояния ворот (открыты/закрыты) и управления воротами", "Spring MVC")
+        Component(component_gates, "gates-component", "Компонент обеспечивает функциональность для получения состояний ворот и управления воротами, получения и хранения информации о настройках соединения устройств", "Spring Bean")
+        Component(component_device_adapter, "device-adapter-component", "Компонент обеспечивает функциональность для выполнения запросов к устройствам, управляющим воротами в доме", "Spring Bean")
+    }
+
+    Container(container_device_manager, "Сервис управления устройствами", "")
+    ContainerDb(db, "Данные о настройках модулей и устройств для выполнения запросов", "PostgreSQL")
+}
+
+Boundary(external_house_boundary, "Дом, подключенный к системе 'Умный дом'") {
+    System_Ext(gates_system, "Система управления воротами", "API для получения данных о текущем состоянии, а также открытия и закрытия ворот")
+}
+
+
+Rel(api_gateway, component_gates_api, "")
+Rel(component_gates_api, component_gates, "")
+Rel(component_gates, component_device_adapter, "")
+Rel(component_gates, container_device_manager, "")
+Rel(component_gates, db, "")
+
+Rel(component_device_adapter, gates_system, "")
+
+@enduml

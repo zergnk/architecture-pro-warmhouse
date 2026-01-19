@@ -1,0 +1,62 @@
+@startuml
+title Container Diagram: Система "Умный дом"
+
+top to bottom direction
+
+!include <C4/C4_Container.puml>
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "Пользователь")
+
+System_Boundary(smart_house, "Система 'Умный дом'") {
+    Container("auth_service", "Сервис аутентификации и авторизации", "контекст: Аутентиффикация и авторизация")
+    Container("api_gateway", "API шлюз", "")
+
+    Container("user_data_management_service", "Сервис управления пользовательскими данными", "контексты: Управление пользователями, Управление домами")
+
+    Container("device_management_service", "Сервис управления устройствами", "контексты: Управление устройствами")
+    Container("system_heating_management_service", "Сервис управления системой отопления", "контексты: Управление системой отопления")
+    Container("system_lightning_management_service", "Сервис управления системой освещения", "контексты: Управление системой освещения")
+    Container("gates_management_service", "Сервис управления воротами", "контексты: Управление воротами")
+
+    Container("telemetry_service", "Сервис телеметрии", "контексты: Управление телеметрией и сбор данных")
+    Container("scenario_management_service", "Сервис управления сценариями", "контексты: Управление сценариями работы и их выполнение")
+}
+
+Boundary(external_house_boundary, "Дом, подключенный к системе 'Умный дом'") {
+    System_Ext(heating_system, "Система управления отоплением", "API для получения данных о текущем состоянии, а также получения и установки значений температуры")
+    System_Ext(lightning_system, "Система управления освещением", "API для получения данных о текущем состоянии, а также включения и выключения освещения")
+    System_Ext(gates_system, "Система управления воротами", "API для получения данных о текущем состоянии, а также открытия и закрытия ворот")
+}
+
+
+
+Rel(user, api_gateway, "[Rest API]")
+Rel(user, auth_service, "[http]")
+Rel(api_gateway, auth_service, "[http]")
+Rel(api_gateway, user_data_management_service, "[Rest API]")
+Rel(api_gateway, device_management_service, "[Rest API]")
+Rel(api_gateway, telemetry_service, "[Rest API]")
+Rel(api_gateway, scenario_management_service, "[Rest API]")
+Rel(api_gateway, system_heating_management_service, "[Rest API]")
+Rel(api_gateway, system_lightning_management_service, "[Rest API]")
+Rel(api_gateway, gates_management_service, "[Rest API]")
+
+Rel(scenario_management_service, system_heating_management_service, "[Rest API]")
+Rel(scenario_management_service, system_lightning_management_service, "[Rest API]")
+Rel(scenario_management_service, gates_management_service, "[Rest API]")
+
+Rel("telemetry_service", system_heating_management_service, "[Rest API]",)
+Rel("telemetry_service", system_lightning_management_service, "[Rest API]")
+Rel("telemetry_service", gates_management_service, "[Rest API]")
+
+Rel(system_heating_management_service, heating_system, "[http]")
+Rel(system_lightning_management_service, lightning_system, "[http]")
+Rel(gates_management_service, gates_system, "[http]")
+
+Rel(system_heating_management_service, "device_management_service", "[Rest API]")
+Rel(system_lightning_management_service, device_management_service, "[Rest API]")
+Rel(gates_management_service, device_management_service, "[Rest API]")
+
+@enduml

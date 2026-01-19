@@ -1,0 +1,27 @@
+@startuml
+title
+    Context Diagram: Система "Умный дом"
+    <i>(As Is)</i>
+end title
+
+top to bottom direction
+
+!include <C4/C4_Context.puml>
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "Пользователь")
+Person(technical_specialist, "Технический специалист")
+
+System(smart_house, "Система 'Умный дом'", "Система наблюдения за температурой и управления отоплением в доме")
+
+Boundary(external_house_boundary, "Дом, подключенный к системе 'Умный дом'") {
+    System_Ext(heating_system, "Система управления отоплением", "API для получения значений температуры, а также управления системой отопления")
+}
+
+Rel(user, smart_house, "Управляет системой отопления", "HTTP")
+Rel(technical_specialist, smart_house, "Регистрирует и настраивает датчики и реле управления в системе 'Умный дом'", "HTTP")
+Rel(technical_specialist, heating_system, "Устанавливает и настраивает датчики и реле управления")
+Rel(smart_house, heating_system,"Получает значения температуры, включает и выключает отопление")
+
+@enduml

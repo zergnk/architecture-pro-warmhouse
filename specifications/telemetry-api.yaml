@@ -1,0 +1,67 @@
+openapi: '3.0.0'
+info:
+  title: TelemetryData API
+  description: REST API for managing TelemetryData objects
+  version: '1.0.0'
+paths:
+  /telemetry-data:
+    get:
+      operationId: getAllTelemetryData
+      summary: Retrieve all telemetry data records
+      tags:
+        - telemetry-data
+      parameters:
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: houseId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: A list of telemetry data records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TelemetryData'
+components:
+  schemas:
+    TelemetryData:
+      type: object
+      description: Telemetry data record
+      properties:
+        id:
+          type: integer
+          description: Generated unique identifier
+        deviceId:
+          type: integer
+          description: Foreign key to device
+        value:
+          type: number
+          format: float
+        status:
+          type: string
+        time:
+          type: string
+          format: date-time
+tags:
+  - name: telemetry-data
+    description: "Данные телеметрии"
