@@ -73,6 +73,34 @@ services:
     networks:
       - smarthome-network
 
+  telemetry-api:
+    build:
+      context: ./telemetry-api
+      dockerfile: Dockerfile
+    image: telemetry-api
+    container_name: telemetry-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+      app:
+        condition: service_healthy
+    environment:
+      DB_URL: "jdbc:postgresql://postgres:5432/telemetry"
+      DB_USER: "postgres"
+      DB_PASSWORD: "postgres"
+      MONOLITH_API_URL: "http://app:8080/api/v1/sensors"
+    ports:
+      - "8083:8083"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent http://localhost:8083/actuator/health/readiness | grep UP || exit 1"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+    networks:
+      - smarthome-network
+
   app:
     build:
       context: ./smart_home
